@@ -31,7 +31,7 @@
 import { ref } from "vue";
 import Header from "@components/Header/index.vue";
 import Menu from "@components/Menu/index.vue";
-import CenterMapChart from "./comp/centerMapChart.vue";
+import CenterMapChart from "./comp/CenterMapChart.vue";
 // import CenterGeoChart from "./comp/centerGeoChart.vue";
 import CenterGeo2dChart from "./comp/centerGeo2dChart.vue";
 import LeftBottomChart from "./comp/leftBottomChart.vue";
