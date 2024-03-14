@@ -37,7 +37,7 @@ import CenterMapChart1 from "./comp/centerMapChart1.vue";
 import LeftTopChart from "./comp/leftTopChart.vue";
 import leftBottomChart from "./comp/leftBottomChart.vue";
 import RightTopChart from "./comp/rightTopChart.vue";
-import RightBottomChart from "./comp/RightBottomChart.vue";
+import RightBottomChart from "./comp/rightBottomChart.vue";
 import FooterList from "./comp/footerList.vue";
 const title = ref("党建工作");
 const tag = ref(0);
