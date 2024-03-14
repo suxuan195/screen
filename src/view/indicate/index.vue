@@ -23,8 +23,8 @@
 <script setup>
 import Header from "@components/Header/index.vue";
 import Menu from "@components/Menu/index.vue";
-import CenterTopChart from "./comp/centerTopChart.vue";
-import CenterBottomChart from "./comp/centerBottomChart.vue";
+import CenterTopChart from "./comp/CenterTopChart.vue";
+import CenterBottomChart from "./comp/CenterBottomChart.vue";
 import LeftBottomChart from "./comp/leftBottomChart.vue";
 import LeftTopChart from "./comp/leftTopChart.vue";
 import RightBottomChart from "./comp/rightBottomChart.vue";
