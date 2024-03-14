@@ -1,0 +1,326 @@
+<template>
+    <Dialog :width="1600" :height="660" :showModel="showModel" title="决议情况" @close="close">
+        <div class="table-wrap">
+            <div class="form">
+                <el-form :model="form" inline>
+                    <el-form-item label="议题名称：">
+                        <el-input v-model="form.topicN" placeholder="请输入议题名称" />
+                    </el-form-item>
+                    <el-form-item label="会议名称：">
+                        <el-input v-model="form.meetingM" placeholder="请输入会议名称" />
+                    </el-form-item>
+                    <el-form-item label="企业名称：">
+                        <el-input v-model="form.enterpriseN" placeholder="请输入企业名称" />
+                    </el-form-item>
+                    <el-form-item label="议题编码：">
+                        <el-input v-model="form.code" placeholder="请输入议题编码" />
+                    </el-form-item>
+                    <el-form-item label="执行反馈：" style="margin-top:20px">
+                        <el-select v-model="form.feedBack" class="m-2" placeholder="Select" size="large">
+                            <el-option v-for="item in state.options" :key="item.value" :label="item.label"
+                                :value="item.value" />
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item class="mt10">
+                        <el-button type="primary" @click="onSearch">查询</el-button>
+                    </el-form-item>
+                    <el-form-item class="mt10">
+                        <el-button type="primary" @click="onReset">重置</el-button>
+                    </el-form-item>
+                    <el-form-item class="mt10">
+                        <el-button type="primary" @click="onclose">关闭</el-button>
+                    </el-form-item>
+                </el-form>
+            </div>
+            <ulList :ulList="state.ulList" class="mb16" />
+            <custom-table class="mb20" :tableData="state.tableData" maxHeight="360px" :tableHeader="state.tableHeader"
+                :hasIndex="true"></custom-table>
+            <div class="pagination">
+                <el-pagination v-model:current-page="state.page" v-model:page-size="state.size"
+                    :page-sizes="[10, 20, 30, 40, 50]" background layout="total, sizes, prev, pager, next"
+                    :total="state.total" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
+            </div>
+        </div>
+    </Dialog>
+</template>
+      
+<script setup>
+import Dialog from "@components/Dialog/index.vue";
+import { ref, reactive } from "vue";
+import { useList } from "../hooks/centerBottomData";
+import customTable from '../../../components/customTable/customTable.vue'
+import ulList from '../../tripleAndLarge/popup/ulList.vue'
+const { list, getList } = useList();
+const showModel = ref(false);
+const form = reactive({
+    topicN: "",
+    meetingM: "",
+    enterpriseN: "",
+    code: '',
+    feedBack: ''
+});
+const state = reactive({
+    tableData: [{
+        name: '研究集团公司本部融资事项',
+        price: '2023年9月15日党委常委会',
+        date: '中国电力建设股份有限公司'
+    }, {
+        name: '研究集团公司本部融资事项',
+        price: '2023年9月15日党委常委会',
+        date: '中国电力建设股份有限公司'
+    }, {
+        name: '研究集团公司本部融资事项',
+        price: '2023年9月15日党委常委会',
+        date: '中国电力建设股份有限公司'
+    }, {
+        name: '研究集团公司本部融资事项',
+        price: '2023年9月15日党委常委会',
+        date: '中国电力建设股份有限公司'
+    }, {
+        name: '研究集团公司本部融资事项',
+        price: '2023年9月15日党委常委会',
+        date: '中国电力建设股份有限公司'
+    }, {
+        name: '研究集团公司本部融资事项',
+        price: '2023年9月15日党委常委会',
+        date: '中国电力建设股份有限公司'
+    }, {
+        name: '研究集团公司本部融资事项',
+        price: '2023年9月15日党委常委会',
+        date: '中国电力建设股份有限公司'
+    }, {
+        name: '研究集团公司本部融资事项',
+        price: '2023年9月15日党委常委会',
+        date: '中国电力建设股份有限公司'
+    }],
+    tableHeader: [
+        {
+            label: "议题名称",
+            className: 'hrefActive',
+            prop: "name",
+            sortable: true
+        },
+        {
+            label: "会议名称",
+            className: 'hrefActive',
+            prop: "price",
+            sortable: true
+        },
+        {
+            label: "企业名称",
+            prop: "date",
+            sortable: true
+        },
+        {
+            label: "议题编码",
+            prop: "date",
+            sortable: true
+        },
+        {
+            label: "议题决议",
+            prop: "date",
+            sortable: true
+        },
+    ],
+    ulList: [
+        {
+            label: "当前总数：",
+            value: 524
+        },
+        {
+            label: "有权限查看数：",
+            value: 45
+        },
+        {
+            label: "无权限查看数：",
+            value: 314
+        },
+    ],
+    total: 100,
+    page: 1,
+    size: 10,
+    options: [
+        {
+            value: 'Option1',
+            label: 'Option1',
+        },
+        {
+            value: 'Option2',
+            label: 'Option2',
+        },
+        {
+            value: 'Option3',
+            label: 'Option3',
+        },
+        {
+            value: 'Option4',
+            label: 'Option4',
+        },
+        {
+            value: 'Option5',
+            label: 'Option5',
+        },
+    ]
+});
+const onSearch = () => {
+    getList(form);
+};
+
+const handleSizeChange = (val) => {
+    state.size = val;
+    getList(form);
+};
+const handleCurrentChange = (val) => {
+    state.page = val;
+    getList(form);
+};
+const onReset = () => {
+    form.name = "";
+    //   form.code = "";
+    getList(form);
+};
+const onclose = () => {
+    console.log('关闭');
+}
+const setList = (name) => {
+    form.code = name;
+    getList(form);
+    state.tableData = list;
+};
+const close = () => {
+    showModel.value = false;
+    state.tableData = [];
+};
+defineExpose({
+    setList,
+    showModel,
+});
+</script>
+      
+<style lang="scss" scoped>
+.table-wrap {
+    padding: 25px;
+}
+
+.form {
+    margin-bottom: 20px;
+
+    :deep(.el-form-item__label) {
+        color: #fff;
+        font-size: 14px;
+    }
+
+    :deep(.el-input__inner) {
+        color: #fff;
+    }
+
+    :deep(.el-input__wrapper) {
+        width: 280px;
+        height: 32px;
+        line-height: 32px;
+        border-radius: 4px;
+        background: linear-gradient(0deg,
+                rgba(0, 155, 255, 0) 0%,
+                rgba(0, 155, 255, 0.3) 100%);
+
+        box-sizing: border-box;
+        border: none;
+        box-shadow: 0 0 0 1px #0093ff inset;
+        border-image: linear-gradient(180deg,
+                rgba(91, 239, 255, 0) 0%,
+                rgba(32, 153, 245, 0.8) 100%);
+    }
+
+    .el-button {
+        height: 32px;
+        line-height: 32px;
+        background-color: transparent;
+        font-size: 14px;
+
+        &:hover {
+            background-color: #0093ff;
+        }
+    }
+
+    .el-form-item {
+        margin-right: 20px;
+    }
+}
+
+.mt10 {
+    margin-top: 17px;
+}
+
+.mb16 {
+    margin-bottom: 16px;
+}
+
+.mb20 {
+    margin-bottom: 20px;
+}
+
+.pagination {
+    float: right;
+
+    :deep(.el-pagination__total) {
+        color: #fff;
+        font-size: 14px;
+    }
+
+    :deep(.el-select .el-input__wrapper) {
+        background-color: transparent;
+        border-radius: 4px;
+        height: 28px;
+        line-height: 28px;
+        border: none;
+        box-shadow: 0 0 0 1px #0093ff inset;
+    }
+
+    .el-select {
+        margin-top: 20px;
+    }
+
+    :deep(.el-select .el-input__inner) {
+        color: #fff;
+    }
+
+    :deep(.btn-prev) {
+        background-color: transparent !important;
+        color: #fff;
+
+        &:hover {
+            background-color: #0093ff !important;
+        }
+    }
+
+    :deep(.btn-next) {
+        background-color: transparent !important;
+        color: #fff;
+
+        &:hover {
+            background-color: #0093ff !important;
+        }
+    }
+
+    :deep(.el-pager li) {
+        background-color: transparent !important;
+        color: #fff;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    :deep(.el-pager li.is-active) {
+        background-color: #0093ff !important;
+    }
+
+    :deep(.el-pagination .el-select .el-input) {
+        width: 100px;
+    }
+}
+</style>
+<style>
+.el-select-dropdown__item {
+    font-size: 14px !important;
+}
+</style>
+      
