@@ -33,7 +33,7 @@ import Header from "@components/Header/index.vue";
 import Menu from "@components/Menu/index.vue";
 import HeatMapChart from "./comp/heatMapChart.vue";
 import CenterMapChart from "./comp/centerMapChart.vue";
-import CenterMapChart1 from "./comp/CenterMapChart1.vue";
+import CenterMapChart1 from "./comp/centerMapChart1.vue";
 import LeftTopChart from "./comp/leftTopChart.vue";
 import leftBottomChart from "./comp/leftBottomChart.vue";
 import RightTopChart from "./comp/rightTopChart.vue";
